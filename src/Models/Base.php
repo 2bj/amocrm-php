@@ -113,7 +113,7 @@ class Base extends Request implements \ArrayAccess
     public function addCustomField($id, $value, $enum = false)
     {
         $field = [
-            'id' => $id,
+            'id'     => $id,
             'values' => [],
         ];
 
@@ -138,6 +138,23 @@ class Base extends Request implements \ArrayAccess
         }
 
         $this->values['custom_fields'][] = $field;
+
+        return $this;
+    }
+
+    /**
+     * Добавление кастомного поля модели c мульти значениями
+     *
+     * @param int $id Уникальный идентификатор заполняемого дополнительного поля
+     * @param mixed $values Значения заполняемого дополнительного поля
+     * @return $this
+     */
+    public function addCustomMultipleField($id, array $values)
+    {
+        $this->values['custom_fields'][] = [
+            'id'     => $id,
+            'values' => $values
+        ];
 
         return $this;
     }
